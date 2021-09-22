@@ -33,6 +33,9 @@
 
 	<div class="entry-content">
 		<?php
+		
+		echo the_date();
+		
 		is_archive() ? the_excerpt() : the_content(
 			sprintf(
 				wp_kses(
@@ -55,6 +58,21 @@
 			)
 		);
 		?>
+
+		<h2><?php echo __('Нещодавні записи', 'innovex') ?></h2>
+		<ul>
+			<?php
+				$recent_posts = wp_get_recent_posts(array(
+					'post_type'=>'innovex_news', 
+					'numberposts' => 3,
+					'orderby' => 'post_date',
+					'order' => 'DESC'
+				));
+				foreach( $recent_posts as $recent ){
+					echo '<li><a href="' . get_permalink($recent["ID"]) . '" title="Look '.esc_attr($recent["post_title"]).'" >' .   $recent["post_title"].'</a> </li> ';
+				}
+			?>
+		</ul>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
