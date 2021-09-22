@@ -27,14 +27,32 @@
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
+		
+		<?php echo the_date(); ?>
 	</header><!-- .entry-header -->
 
 	<?php innovecs_post_thumbnail(); ?>
 
-	<div class="entry-content">
+	<div class="entry-content">		
+
+		<div class="date-event">
+			<?php if( get_field('data_event_begin') ): ?>
+				<span class="date-event_heading">
+					<?php echo __('Початок події:', 'innovex');?>
+				</span>
+				<?php the_field('data_event_begin'); ?>
+			<?php endif; ?>
+		</div>
+		<div>
+			<?php if( get_field('data_event_end') ): ?>
+				<span class="date-event_heading">
+					<?php echo __('Закінчення події:', 'innovex');?>
+				</span>
+				<?php the_field('data_event_end'); ?>
+			<?php endif; ?>
+		</div>
+
 		<?php
-		
-		echo the_date();
 
 		is_archive() ? the_excerpt() : the_content(
 			sprintf(
