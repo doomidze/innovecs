@@ -178,3 +178,25 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+ * Creating custom post type News
+ */
+function innovecs_create_post_type_news() {
+	register_post_type('innovecs_news',
+		array(
+			'labels' => array(
+				'name' => _x( 'Новини', 'Post Type General Name', 'innovecs' ),
+				'singular_name' => _x( 'Новина', 'Post Type General Name', 'innovecs' ),
+				'add_new' => __( 'Додати новину', 'innovecs' ),
+			),
+			'public' => true,
+			'has_archive' => true,
+			'rewrite' => array('slug' => 'news'),
+			'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+			'show_in_nav_menus' => true,
+			'menu_position' => 20,
+			'menu_icon' => 'dashicons-text-page'		
+		)
+	);
+}
+add_action('init', 'innovecs_create_post_type_news');
