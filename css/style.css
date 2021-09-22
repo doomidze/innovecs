@@ -648,31 +648,7 @@ textarea {
   display: block; }
 
 #comments {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
-  #comments .comment {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    margin-bottom: 30px; }
-    #comments .comment .name {
-      font-weight: 500; }
-    #comments .comment .email {
-      color: #4169e1; }
-    #comments .comment .body::first-letter {
-      font-size: 150%;
-      text-transform: uppercase; }
+  background: red; }
 
 /* Widgets
 --------------------------------------------- */

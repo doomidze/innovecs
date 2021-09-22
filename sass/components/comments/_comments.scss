@@ -5,3 +5,26 @@
 .bypostauthor {
 	display: block;
 }
+
+#comments {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	.comment {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 30px;
+		.name {
+			font-weight: 500;
+		}
+		.email {
+			color: $color__link;
+		}
+		.body {
+			&::first-letter {
+				font-size: 150%;
+				text-transform: uppercase;
+			}
+		}
+	}
+}
