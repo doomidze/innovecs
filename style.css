@@ -582,7 +582,8 @@ textarea {
     .main-navigation ul li.focus > ul {
       left: auto; }
   .main-navigation li {
-    position: relative; }
+    position: relative;
+    margin: 0 15px; }
   .main-navigation a {
     display: block;
     text-decoration: none; }
@@ -622,6 +623,9 @@ textarea {
 --------------------------------------------- */
 .sticky {
   display: block; }
+
+#page {
+  padding: 0 1em; }
 
 .post,
 .page {
@@ -748,6 +752,9 @@ textarea {
 
 .gallery-caption {
   display: block; }
+
+.site-header .logo {
+  text-align: center; }
 
 /*--------------------------------------------------------------
 # Plugins

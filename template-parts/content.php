@@ -9,7 +9,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php is_archive() ? post_class('col-4 col_lg-6 col_md-12') : post_class(); ?>>
 	<header class="entry-header">
 		<?php
 		if ( is_singular() ) :
@@ -28,12 +28,14 @@
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 		
-		<?php echo the_date(); ?>
+		<?php echo the_time('d.m.Y'); ?>
 	</header><!-- .entry-header -->
 
-	<?php innovecs_post_thumbnail(); ?>
+	<div class="entry-content <?php if (is_single()) : echo 'grid'; endif ?>">
 
-	<div class="entry-content">		
+	<?php if (is_single()) : echo '<div class="col-4 col_lg-12">'; endif ?>
+
+		<?php innovecs_post_thumbnail(); ?>
 
 		<div class="date-event">
 			<?php if( get_field('data_event_begin') ): ?>
@@ -52,8 +54,10 @@
 			<?php endif; ?>
 		</div>
 
-		<?php
+	<?php if (is_single()) : echo '</div>'; endif ?>
 
+	<?php if (is_single()) : echo '<div class="col-6 col_lg-12">'; endif ?>
+		<?php
 		is_archive() ? the_excerpt() : the_content(
 			sprintf(
 				wp_kses(
@@ -68,17 +72,19 @@
 				wp_kses_post( get_the_title() )
 			)
 		);
-
+		?>
+		<?php if (is_single()) : echo '</div>'; endif ?>
+		<?php
 		wp_link_pages(
 			array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'innovecs' ),
 				'after'  => '</div>',
 			)
 		);
-		?>
 
-			<h2><?php echo __('Нещодавні записи', 'innovex') ?></h2>
-			<ul>
+		if ( is_single()) : ?>
+			<section class="grid">
+				<h2 class="col-12"><?php echo __('Нещодавні записи', 'innovex') ?></h2>
 				<?php
 					$recent_posts = wp_get_recent_posts(array(
 						'post_type'=>'innovecs_news',
@@ -87,10 +93,16 @@
 						'order' => 'DESC'
 					));
 					foreach( $recent_posts as $recent ){
-						echo '<li><a href="' . get_permalink($recent["ID"]) . '" title="Look '.esc_attr($recent["post_title"]).'" >' .   $recent["post_title"].'</a> </li> ';
+						echo '<div class="col-4 col_lg-6 col_sm-12">';
+						if ( has_post_thumbnail( $recent["ID"]) ) {
+							echo  get_the_post_thumbnail($recent["ID"],'thumbnail');
+						}
+						echo '<div><a href="' . get_permalink($recent["ID"]) . '" title="Look '.esc_attr($recent["post_title"]).'" >' .   $recent["post_title"].'</a> </div> ';
+						echo '</div>';
 					}
 				?>
-			</ul>
+			</section>
+		<?php endif; ?>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
